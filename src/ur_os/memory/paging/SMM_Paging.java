@@ -68,7 +68,7 @@ public class SMM_Paging extends SystemMemoryManager{
                 
                 getOS().interrupt(InterruptType.LOAD_PAGE, pmmp.getProcess(),mpe); //Load the frame in swap of page la to real memory
                 pmmp.setFrameID(pageToLoad, frameVictim);
-                
+                pmmp.getPT().getList().get(pageToLoad).setClock(getOS().getClock());//Set the loading time to the page
                 return getPhysicalAddress(logicalAddress, pmm, store); //Try again!
             }else{
                 if(store){

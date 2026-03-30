@@ -169,7 +169,7 @@ public class PMM_Paging extends ProcessMemoryManager{
     @Override
     public int getVictim(){
         if(this.loadedPages == this.assignedPages)
-            return pvmm.getVictim(memoryAccesses,this.pt.getValidList());
+            return pvmm.getVictim(memoryAccesses,this.pt);
         else
             return -1;
     }

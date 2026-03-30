@@ -71,7 +71,7 @@ public class PMM_Segmentation extends ProcessMemoryManager{
 
     @Override
     public int getVictim() {
-        return pvmm.getVictim(memoryAccesses,st.getValidList());
+        return pvmm.getVictim(memoryAccesses,null);
     }
     
 }

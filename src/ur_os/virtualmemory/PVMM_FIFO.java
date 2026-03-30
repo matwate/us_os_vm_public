@@ -4,8 +4,8 @@
  */
 package ur_os.virtualmemory;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
+import ur_os.memory.paging.PageTable;
 
 /**
  *
@@ -18,7 +18,7 @@ public class PVMM_FIFO extends ProcessVirtualMemoryManager{
     }
     
     @Override
-    public int getVictim(LinkedList<Integer> memoryAccesses, ArrayList<Integer> validList) {
+    public int getVictim(LinkedList<Integer> memoryAccesses, PageTable pt) {
         
         //To do
         

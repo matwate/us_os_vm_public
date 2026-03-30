@@ -4,8 +4,8 @@
  */
 package ur_os.virtualmemory;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
+import ur_os.memory.paging.PageTable;
 
 /**
  *
@@ -15,7 +15,7 @@ public abstract class ProcessVirtualMemoryManager {
     
     ProcessVirtualMemoryManagerType type;
     
-    public abstract int getVictim(LinkedList<Integer> memoryAccesses, ArrayList<Integer> validList);
+    public abstract int getVictim(LinkedList<Integer> memoryAccesses, PageTable pt);
     
     
     

@@ -32,12 +32,12 @@ public class PMM_Contiguous extends ProcessMemoryManager{
         super(p, MemoryManagerType.CONTIGUOUS, vm.getSize());
         if(m != null){
             memorySlot = new MemorySlot(m);
+            valid = true;
         }else{
             memorySlot = null;
+            valid = false;
         }
-        if(m != null){
-            valid = true;
-        }
+        
         vMemorySlot = new MemorySlot(vm); //Swap memory allocation
         dirty = false;
     }

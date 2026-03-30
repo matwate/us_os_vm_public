@@ -295,7 +295,9 @@ public class SystemOS implements Runnable{
         return simType;
     }
     
-    
+    public int getClock(){
+        return clock;
+    }
     
     @Override
     public void run() {

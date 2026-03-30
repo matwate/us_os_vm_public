@@ -405,4 +405,7 @@ public class OS {
         return system.getSimulationType();
     }
     
+    public int getClock(){
+        return system.getClock();
+    }
 }

@@ -11,17 +11,23 @@ package ur_os.memory.paging;
 public class PageTableEntry implements Comparable{
     
     MemoryFrame frameId;
+    int clock;
     boolean valid;
     boolean dirty;
 
     public PageTableEntry(int frameId) {
-        this(frameId, false);
+        this(frameId, false, 0);
     }
     
     public PageTableEntry(int frameId, boolean valid) {
+        this(frameId, valid, 0);
+    }
+    
+    public PageTableEntry(int frameId, boolean valid, int clock) {
         this.frameId = new MemoryFrame(frameId);
         this.valid = valid;
         dirty = false;
+        this.clock = clock;
     }
     
     public void setDirty(boolean dirty){
@@ -36,7 +42,13 @@ public class PageTableEntry implements Comparable{
         this.valid = valid;
     }
     
+    public int getClock(){
+        return clock;
+    }
     
+    public void setClock(int clock){
+        this.clock = clock;
+    }
     
     public int getFrameId(){
         return frameId.getFrameID();
@@ -52,7 +64,7 @@ public class PageTableEntry implements Comparable{
     
     @Override
     public String toString(){
-        return "Frame: "+frameId+" Valid: "+valid+" Dirty: "+dirty;
+        return "Frame: "+frameId+" Valid: "+valid+" Dirty: "+dirty+" Clock: "+clock;
     }
 
     @Override

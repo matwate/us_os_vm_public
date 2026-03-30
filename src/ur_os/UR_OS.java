@@ -14,7 +14,7 @@ import ur_os.system.SimulationType;
  */
 public class UR_OS {
 
-    private static String VERSION = "0.0.5.3";
+    private static String VERSION = "0.0.5.4";
     
     /**
      * @param args the command line arguments

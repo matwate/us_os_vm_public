@@ -40,7 +40,7 @@ public class SystemOS implements Runnable {
   public static final int SEED_SEGMENTS = 7401;
   public static final int SEED_PROCESS_SIZE = 9630;
 
-  public static final int MEMORY_SIZE = 1_048_576; // 1MB
+  public static final int MEMORY_SIZE = 12 * 1024 + 1;
   public static final int SWAP_MEMORY_SIZE = 1_073_741_824; // 1 GB
 
   protected ArrayList<Process> processes;
@@ -65,7 +65,7 @@ public class SystemOS implements Runnable {
     processes = new ArrayList();
     // initSimulationQueue();
     // initSimulationQueueSimple();
-    initSimulationQueueSimpler();
+    initSimulationQueueSimpler4();
 
     showProcesses();
     this.simType = simType;
@@ -285,6 +285,78 @@ public class SystemOS implements Runnable {
     clock = 0;
   }
 
+  public void initSimulationQueueSimpler4() {
+
+    // Process P0 - arrival: 0, size: 2048, 3 CPU → LOAD(4) → 3 CPU → END
+    Process p = new Process(0, 0);
+    p.setSize(2048);
+    Instruction temp;
+    p.addCPUInstructions(3);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 0, (byte) -1, 4);
+    p.addInstruction(temp);
+    p.addCPUInstructions(3);
+    temp = new EndInstruction();
+    p.addInstruction(temp);
+    processes.add(p);
+
+    // Process P1 - arrival: 1, size: 1024, 2 CPU → STORE(3) → 2 CPU → END
+    p = new Process(1, 1);
+    p.setSize(1024);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 0, (byte) 0, 3);
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new EndInstruction();
+    p.addInstruction(temp);
+    processes.add(p);
+
+    // Process P2 - arrival: 2, size: 3072, 6 CPU → LOAD(4) → 6 CPU → END
+    p = new Process(2, 2);
+    p.setSize(3072);
+    p.addCPUInstructions(6);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 0, (byte) -1, 4);
+    p.addInstruction(temp);
+    p.addCPUInstructions(6);
+    temp = new EndInstruction();
+    p.addInstruction(temp);
+    processes.add(p);
+
+    // Process P3 - arrival: 15, size: 1536, 4 CPU → STORE(4) → 4 CPU → END
+    p = new Process(3, 15);
+    p.setSize(1536);
+    p.addCPUInstructions(4);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 0, (byte) 0, 4);
+    p.addInstruction(temp);
+    p.addCPUInstructions(4);
+    temp = new EndInstruction();
+    p.addInstruction(temp);
+    processes.add(p);
+
+    // Process P4 - arrival: 22, size: 2048, 3 CPU → LOAD(3) → 3 CPU → END
+    p = new Process(4, 22);
+    p.setSize(2048);
+    p.addCPUInstructions(3);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 0, (byte) -1, 3);
+    p.addInstruction(temp);
+    p.addCPUInstructions(3);
+    temp = new EndInstruction();
+    p.addInstruction(temp);
+    processes.add(p);
+
+    // Process P5 - arrival: 30, size: 768, 2 CPU → STORE(3) → 2 CPU → END
+    p = new Process(5, 30);
+    p.setSize(768);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 0, (byte) 0, 3);
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new EndInstruction();
+    p.addInstruction(temp);
+    processes.add(p);
+
+    clock = 0;
+  }
+
   public boolean isSimulationFinished() {
 
     boolean finished = true;
@@ -389,7 +461,8 @@ public class SystemOS implements Runnable {
     System.out.printf("Throughput: %.4f processes/cycle%n", this.calcThroughput());
     System.out.printf("Average Turnaround Time: %.2f cycles%n", this.calcTurnaroundTime());
     System.out.printf("Average Waiting Time: %.2f cycles%n", this.calcAvgWaitingTime());
-    System.out.printf("Average Context Switches: %.2f switches/process%n", this.calcAvgContextSwitches());
+    System.out.printf(
+        "Average Context Switches: %.2f switches/process%n", this.calcAvgContextSwitches());
     System.out.printf("Average Response Time: %.2f cycles%n", this.calcAvgResponseTime());
     if (fragmentationSamples > 0) {
       double avgEF = totalExternalFragmentation / fragmentationSamples;
@@ -400,7 +473,8 @@ public class SystemOS implements Runnable {
       System.out.printf("Avg Number of Holes: %.2f holes%n", avgHoles);
       System.out.printf("Peak Number of Holes: %d holes%n", peakHoles);
       System.out.printf("Avg Memory Utilization: %.2f%%%n", avgMU * 100);
-      System.out.println("Total Memory: " + MEMORY_SIZE + " bytes (" + (MEMORY_SIZE / 1024) + " KB)");
+      System.out.println(
+          "Total Memory: " + MEMORY_SIZE + " bytes (" + (MEMORY_SIZE / 1024) + " KB)");
     }
 
     // showProcesses();
@@ -537,10 +611,8 @@ public class SystemOS implements Runnable {
       totalMemoryUtilization += mu;
       totalHoles += holes;
 
-      if (ef > peakExternalFragmentation)
-        peakExternalFragmentation = ef;
-      if (holes > peakHoles)
-        peakHoles = holes;
+      if (ef > peakExternalFragmentation) peakExternalFragmentation = ef;
+      if (holes > peakHoles) peakHoles = holes;
 
       fragmentationSamples++;
     }

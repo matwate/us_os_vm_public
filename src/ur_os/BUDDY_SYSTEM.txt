@@ -1,0 +1,418 @@
+Process list:
+PID: 0 Size: 0 t_init: 0 t_finished: -1
+PMM:
+MemSlot: null vSlot: Base: 0 Size: 0 Valid:false Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 4 RC: 4 T: MEMORY F: false LOAD,0,-1
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+PID: 1 Size: 0 t_init: 1 t_finished: -1
+PMM:
+MemSlot: null vSlot: Base: 0 Size: 0 Valid:false Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 3 RC: 3 T: MEMORY F: false STORE,0,0
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+PID: 2 Size: 0 t_init: 2 t_finished: -1
+PMM:
+MemSlot: null vSlot: Base: 0 Size: 0 Valid:false Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 4 RC: 4 T: MEMORY F: false LOAD,0,-1
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+PID: 3 Size: 0 t_init: 15 t_finished: -1
+PMM:
+MemSlot: null vSlot: Base: 0 Size: 0 Valid:false Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 4 RC: 4 T: MEMORY F: false STORE,0,0
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+PID: 4 Size: 0 t_init: 22 t_finished: -1
+PMM:
+MemSlot: null vSlot: Base: 0 Size: 0 Valid:false Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 3 RC: 3 T: MEMORY F: false LOAD,0,-1
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+PID: 5 Size: 0 t_init: 30 t_finished: -1
+PMM:
+MemSlot: null vSlot: Base: 0 Size: 0 Valid:false Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 3 RC: 3 T: MEMORY F: false STORE,0,0
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+
+******SIMULATION START******
+******Clock: 0******
+Process Created: 0
+PID: 0 Size: 2048 t_init: 0 t_finished: -1
+PMM:
+MemSlot: Base: 0 Size: 2048 vSlot: Base: 0 Size: 2048 Valid:true Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 4 RC: 4 T: MEMORY F: false LOAD,0,-1
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+Free Memory Slots (3):
+=== Buddy System Free Lists ===
+Order 13 (size   8192): [base=8192]
+Order 12 (size   4096): [base=4096]
+Order 11 (size   2048): [base=2048]
+
+Executing CPU instruction
+******Clock: 1******
+Process Created: 1
+PID: 1 Size: 1024 t_init: 1 t_finished: -1
+PMM:
+MemSlot: Base: 2048 Size: 1024 vSlot: Base: 2048 Size: 1024 Valid:true Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 3 RC: 3 T: MEMORY F: false STORE,0,0
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+Free Memory Slots (3):
+=== Buddy System Free Lists ===
+Order 13 (size   8192): [base=8192]
+Order 12 (size   4096): [base=4096]
+Order 10 (size   1024): [base=3072]
+
+Executing CPU instruction
+******Clock: 2******
+Process Created: 2
+PID: 2 Size: 3072 t_init: 2 t_finished: -1
+PMM:
+MemSlot: Base: 4096 Size: 3072 vSlot: Base: 4096 Size: 3072 Valid:true Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 4 RC: 4 T: MEMORY F: false LOAD,0,-1
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+Free Memory Slots (2):
+=== Buddy System Free Lists ===
+Order 13 (size   8192): [base=8192]
+Order 10 (size   1024): [base=3072]
+
+Executing CPU instruction
+******Clock: 3******
+Executing Memory instruction
+******Clock: 4******
+Executing CPU instruction
+Process 0 is executing C: 4 RC: 3 T: MEMORY F: false LOAD,0,-1
+The obtained data is: 0
+MEMORY OPERATION EXECUTION - 2 cycles left
+******Clock: 5******
+Executing CPU instruction
+Process 0 is executing C: 4 RC: 2 T: MEMORY F: false LOAD,0,-1
+The obtained data is: 0
+MEMORY OPERATION EXECUTION - 1 cycles left
+******Clock: 6******
+Executing Memory instruction
+Process 0 is executing C: 4 RC: 1 T: MEMORY F: false LOAD,0,-1
+The obtained data is: 0
+MEMORY OPERATION EXECUTION DONE
+******Clock: 7******
+Executing CPU instruction
+Process 1 is executing C: 3 RC: 2 T: MEMORY F: false STORE,0,0
+The data 0 is stored in: 2048
+MEMORY OPERATION EXECUTION - 1 cycles left
+******Clock: 8******
+Executing CPU instruction
+Process 1 is executing C: 3 RC: 1 T: MEMORY F: false STORE,0,0
+The data 0 is stored in: 2048
+MEMORY OPERATION EXECUTION DONE
+******Clock: 9******
+Executing CPU instruction
+******Clock: 10******
+Executing CPU instruction
+******Clock: 11******
+Executing CPU instruction
+******Clock: 12******
+Executing CPU instruction
+******Clock: 13******
+Executing Memory instruction
+******Clock: 14******
+Executing CPU instruction
+Process 2 is executing C: 4 RC: 3 T: MEMORY F: false LOAD,0,-1
+The obtained data is: 0
+MEMORY OPERATION EXECUTION - 2 cycles left
+******Clock: 15******
+Process Created: 3
+PID: 3 Size: 1536 t_init: 15 t_finished: -1
+PMM:
+MemSlot: Base: 8192 Size: 1536 vSlot: Base: 8192 Size: 1536 Valid:true Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 4 RC: 4 T: MEMORY F: false STORE,0,0
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+Free Memory Slots (3):
+=== Buddy System Free Lists ===
+Order 12 (size   4096): [base=12288]
+Order 11 (size   2048): [base=10240]
+Order 10 (size   1024): [base=3072]
+
+Executing CPU instruction
+Process 2 is executing C: 4 RC: 2 T: MEMORY F: false LOAD,0,-1
+The obtained data is: 0
+MEMORY OPERATION EXECUTION - 1 cycles left
+******Clock: 16******
+Executing CPU instruction
+Process 2 is executing C: 4 RC: 1 T: MEMORY F: false LOAD,0,-1
+The obtained data is: 0
+MEMORY OPERATION EXECUTION DONE
+******Clock: 17******
+Process Terminated: 0 2048
+Free Memory Slots (4):
+=== Buddy System Free Lists ===
+Order 12 (size   4096): [base=12288]
+Order 11 (size   2048): [base=10240] [base=0]
+Order 10 (size   1024): [base=3072]
+
+******Clock: 18******
+Executing CPU instruction
+******Clock: 19******
+Executing CPU instruction
+******Clock: 20******
+Process Terminated: 1 1024
+Free Memory Slots (3):
+=== Buddy System Free Lists ===
+Order 12 (size   4096): [base=12288] [base=0]
+Order 11 (size   2048): [base=10240]
+
+******Clock: 21******
+Executing CPU instruction
+******Clock: 22******
+Process Created: 4
+PID: 4 Size: 2048 t_init: 22 t_finished: -1
+PMM:
+MemSlot: Base: 10240 Size: 2048 vSlot: Base: 10240 Size: 2048 Valid:true Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 3 RC: 3 T: MEMORY F: false LOAD,0,-1
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+Free Memory Slots (2):
+=== Buddy System Free Lists ===
+Order 12 (size   4096): [base=12288] [base=0]
+
+Executing CPU instruction
+******Clock: 23******
+Executing CPU instruction
+******Clock: 24******
+Executing CPU instruction
+******Clock: 25******
+Executing Memory instruction
+******Clock: 26******
+Executing CPU instruction
+Process 3 is executing C: 4 RC: 3 T: MEMORY F: false STORE,0,0
+The data 0 is stored in: 8192
+MEMORY OPERATION EXECUTION - 2 cycles left
+******Clock: 27******
+Executing CPU instruction
+Process 3 is executing C: 4 RC: 2 T: MEMORY F: false STORE,0,0
+The data 0 is stored in: 8192
+MEMORY OPERATION EXECUTION - 1 cycles left
+******Clock: 28******
+Executing CPU instruction
+Process 3 is executing C: 4 RC: 1 T: MEMORY F: false STORE,0,0
+The data 0 is stored in: 8192
+MEMORY OPERATION EXECUTION DONE
+******Clock: 29******
+Executing CPU instruction
+******Clock: 30******
+Process Created: 5
+PID: 5 Size: 768 t_init: 30 t_finished: -1
+PMM:
+MemSlot: Base: 12288 Size: 768 vSlot: Base: 3072 Size: 768 Valid:true Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 3 RC: 3 T: MEMORY F: false STORE,0,0
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+Free Memory Slots (3):
+=== Buddy System Free Lists ===
+Order 12 (size   4096): [base=0]
+Order 11 (size   2048): [base=14336]
+Order 10 (size   1024): [base=13312]
+
+Executing CPU instruction
+******Clock: 31******
+Executing CPU instruction
+******Clock: 32******
+Process Terminated: 2 3072
+Free Memory Slots (3):
+=== Buddy System Free Lists ===
+Order 13 (size   8192): [base=0]
+Order 11 (size   2048): [base=14336]
+Order 10 (size   1024): [base=13312]
+
+******Clock: 33******
+Executing CPU instruction
+******Clock: 34******
+Executing CPU instruction
+******Clock: 35******
+Executing CPU instruction
+******Clock: 36******
+Executing Memory instruction
+******Clock: 37******
+Executing CPU instruction
+Process 4 is executing C: 3 RC: 2 T: MEMORY F: false LOAD,0,-1
+The obtained data is: 0
+MEMORY OPERATION EXECUTION - 1 cycles left
+******Clock: 38******
+Executing CPU instruction
+Process 4 is executing C: 3 RC: 1 T: MEMORY F: false LOAD,0,-1
+The obtained data is: 0
+MEMORY OPERATION EXECUTION DONE
+******Clock: 39******
+Executing CPU instruction
+******Clock: 40******
+Executing CPU instruction
+******Clock: 41******
+Process Terminated: 3 1536
+Free Memory Slots (4):
+=== Buddy System Free Lists ===
+Order 13 (size   8192): [base=0]
+Order 11 (size   2048): [base=14336] [base=8192]
+Order 10 (size   1024): [base=13312]
+
+******Clock: 42******
+Executing CPU instruction
+******Clock: 43******
+Executing CPU instruction
+******Clock: 44******
+Executing Memory instruction
+******Clock: 45******
+Executing CPU instruction
+Process 5 is executing C: 3 RC: 2 T: MEMORY F: false STORE,0,0
+The data 0 is stored in: 12288
+MEMORY OPERATION EXECUTION - 1 cycles left
+******Clock: 46******
+Executing CPU instruction
+Process 5 is executing C: 3 RC: 1 T: MEMORY F: false STORE,0,0
+The data 0 is stored in: 12288
+MEMORY OPERATION EXECUTION DONE
+******Clock: 47******
+Executing CPU instruction
+******Clock: 48******
+Process Terminated: 4 2048
+Free Memory Slots (4):
+=== Buddy System Free Lists ===
+Order 13 (size   8192): [base=0]
+Order 12 (size   4096): [base=8192]
+Order 11 (size   2048): [base=14336]
+Order 10 (size   1024): [base=13312]
+
+******Clock: 49******
+Executing CPU instruction
+******Clock: 50******
+Executing CPU instruction
+******Clock: 51******
+Process Terminated: 5 768
+Free Memory Slots (1):
+=== Buddy System Free Lists ===
+Order 14 (size  16384): [base=0]
+
+******SIMULATION FINISHES******
+******Process Execution******
+0 0 0 0 1 1 1 2 2 2 2 2 2 2 0 0 0 0 1 1 1 3 3 3 3 3 2 2 2 2 2 2 2 4 4 4 4 3 3 3 3 3 5 5 5 4 4 4 4 5 5 5
+******Performance Indicators******
+Total execution cycles: 52
+CPU Utilization: 100.00%
+Throughput: 0.1154 processes/cycle
+Average Turnaround Time: 24.17 cycles
+Average Waiting Time: 13.00 cycles
+Average Context Switches: 2.00 switches/process
+Average Response Time: 6.17 cycles
+Avg External Fragmentation: 33.43%
+Peak External Fragmentation: 60.00%
+Avg Number of Holes: 2.81 holes
+Peak Number of Holes: 4 holes
+Avg Memory Utilization: 14.43%
+Total Memory: 12289 bytes (12 KB)

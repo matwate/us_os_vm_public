@@ -1,0 +1,304 @@
+Process list:
+PID: 0 Size: 0 t_init: 0 t_finished: -1
+PMM:
+MemSlot: null vSlot: Base: 0 Size: 0 Valid:false Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 4 RC: 4 T: MEMORY F: false LOAD,796,-1
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+PID: 1 Size: 0 t_init: 2 t_finished: -1
+PMM:
+MemSlot: null vSlot: Base: 0 Size: 0 Valid:false Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 3 RC: 3 T: MEMORY F: false STORE,86,38
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+PID: 2 Size: 0 t_init: 6 t_finished: -1
+PMM:
+MemSlot: null vSlot: Base: 0 Size: 0 Valid:false Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 4 RC: 4 T: MEMORY F: false LOAD,323,-1
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+PID: 3 Size: 0 t_init: 8 t_finished: -1
+PMM:
+MemSlot: null vSlot: Base: 0 Size: 0 Valid:false Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 4 RC: 4 T: MEMORY F: false STORE,303,42
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+
+******SIMULATION START******
+******Clock: 0******
+Process Created: 0
+PID: 0 Size: 975 t_init: 0 t_finished: -1
+PMM:
+MemSlot: Base: 0 Size: 975 vSlot: Base: 0 Size: 975 Valid:true Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 4 RC: 4 T: MEMORY F: false LOAD,796,-1
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+Free Memory Slots (1):
+Base: 975 Size: 3121
+
+Executing CPU instruction
+******Clock: 1******
+Executing CPU instruction
+******Clock: 2******
+Process Created: 1
+PID: 1 Size: 200 t_init: 2 t_finished: -1
+PMM:
+MemSlot: Base: 975 Size: 200 vSlot: Base: 975 Size: 200 Valid:true Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 3 RC: 3 T: MEMORY F: false STORE,86,38
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+Free Memory Slots (1):
+Base: 1175 Size: 2921
+
+Executing CPU instruction
+******Clock: 3******
+Executing Memory instruction
+******Clock: 4******
+Executing CPU instruction
+Process 0 is executing C: 4 RC: 3 T: MEMORY F: false LOAD,796,-1
+The obtained data is: 0
+MEMORY OPERATION EXECUTION - 2 cycles left
+******Clock: 5******
+Executing CPU instruction
+Process 0 is executing C: 4 RC: 2 T: MEMORY F: false LOAD,796,-1
+The obtained data is: 0
+MEMORY OPERATION EXECUTION - 1 cycles left
+******Clock: 6******
+Process Created: 2
+PID: 2 Size: 747 t_init: 6 t_finished: -1
+PMM:
+MemSlot: Base: 1175 Size: 747 vSlot: Base: 1175 Size: 747 Valid:true Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 4 RC: 4 T: MEMORY F: false LOAD,323,-1
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+Free Memory Slots (1):
+Base: 1922 Size: 2174
+
+Executing CPU instruction
+Process 0 is executing C: 4 RC: 1 T: MEMORY F: false LOAD,796,-1
+The obtained data is: 0
+MEMORY OPERATION EXECUTION DONE
+******Clock: 7******
+Executing Memory instruction
+******Clock: 8******
+Process Created: 3
+PID: 3 Size: 488 t_init: 8 t_finished: -1
+PMM:
+MemSlot: Base: 1922 Size: 488 vSlot: Base: 1922 Size: 488 Valid:true Dirty: false
+PIL:
+Current instruction: 0
+Instruction list: C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 4 RC: 4 T: MEMORY F: false STORE,303,42
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: CPU F: false
+C: 1 RC: 1 T: END F: false
+
+Free Memory Slots (1):
+Base: 2410 Size: 1686
+
+Executing CPU instruction
+Process 1 is executing C: 3 RC: 2 T: MEMORY F: false STORE,86,38
+The data 38 is stored in: 1061
+MEMORY OPERATION EXECUTION - 1 cycles left
+******Clock: 9******
+Executing CPU instruction
+Process 1 is executing C: 3 RC: 1 T: MEMORY F: false STORE,86,38
+The data 38 is stored in: 1061
+MEMORY OPERATION EXECUTION DONE
+******Clock: 10******
+Executing CPU instruction
+******Clock: 11******
+Executing CPU instruction
+******Clock: 12******
+Executing CPU instruction
+******Clock: 13******
+Executing CPU instruction
+******Clock: 14******
+Executing CPU instruction
+******Clock: 15******
+Executing Memory instruction
+******Clock: 16******
+Executing CPU instruction
+Process 2 is executing C: 4 RC: 3 T: MEMORY F: false LOAD,323,-1
+The obtained data is: 0
+MEMORY OPERATION EXECUTION - 2 cycles left
+******Clock: 17******
+Executing CPU instruction
+Process 2 is executing C: 4 RC: 2 T: MEMORY F: false LOAD,323,-1
+The obtained data is: 0
+MEMORY OPERATION EXECUTION - 1 cycles left
+******Clock: 18******
+Executing CPU instruction
+Process 2 is executing C: 4 RC: 1 T: MEMORY F: false LOAD,323,-1
+The obtained data is: 0
+MEMORY OPERATION EXECUTION DONE
+******Clock: 19******
+Process Terminated: 0 975
+Free Memory Slots (2):
+Base: 0 Size: 975
+Base: 2410 Size: 1686
+
+******Clock: 20******
+Executing CPU instruction
+******Clock: 21******
+Executing CPU instruction
+******Clock: 22******
+Executing CPU instruction
+******Clock: 23******
+Executing CPU instruction
+******Clock: 24******
+Executing Memory instruction
+******Clock: 25******
+Executing CPU instruction
+Process 3 is executing C: 4 RC: 3 T: MEMORY F: false STORE,303,42
+The data 42 is stored in: 2225
+MEMORY OPERATION EXECUTION - 2 cycles left
+******Clock: 26******
+Executing CPU instruction
+Process 3 is executing C: 4 RC: 2 T: MEMORY F: false STORE,303,42
+The data 42 is stored in: 2225
+MEMORY OPERATION EXECUTION - 1 cycles left
+******Clock: 27******
+Executing CPU instruction
+Process 3 is executing C: 4 RC: 1 T: MEMORY F: false STORE,303,42
+The data 42 is stored in: 2225
+MEMORY OPERATION EXECUTION DONE
+******Clock: 28******
+Process Terminated: 1 200
+Free Memory Slots (2):
+Base: 0 Size: 1175
+Base: 2410 Size: 1686
+
+******Clock: 29******
+Executing CPU instruction
+******Clock: 30******
+Executing CPU instruction
+******Clock: 31******
+Executing CPU instruction
+******Clock: 32******
+Executing CPU instruction
+******Clock: 33******
+Executing CPU instruction
+******Clock: 34******
+Process Terminated: 2 747
+Free Memory Slots (2):
+Base: 0 Size: 1922
+Base: 2410 Size: 1686
+
+******Clock: 35******
+Executing CPU instruction
+******Clock: 36******
+Executing CPU instruction
+******Clock: 37******
+Executing CPU instruction
+******Clock: 38******
+Executing CPU instruction
+******Clock: 39******
+Executing CPU instruction
+******Clock: 40******
+Executing CPU instruction
+******Clock: 41******
+Executing CPU instruction
+******Clock: 42******
+Process Terminated: 3 488
+Free Memory Slots (1):
+Base: 0 Size: 4096
+
+******SIMULATION FINISHES******
+******Process Execution******
+0 0 0 0 1 1 1 1 2 2 2 2 2 2 2 2 0 0 0 0 3 3 3 3 3 1 1 1 1 2 2 2 2 2 2 3 3 3 3 3 3 3 3
+******Performance Indicators******
+Total execution cycles: 43
+CPU Utilization: 100.00%
+Throughput: 0.0930 processes/cycle
+Average Turnaround Time: 27.75 cycles
+Average Waiting Time: 14.25 cycles
+Average Context Switches: 2.00 switches/process
+Average Response Time: 4.00 cycles
+Avg External Fragmentation: 22.09%
+Peak External Fragmentation: 46.73%
+Avg Number of Holes: 1.53 holes
+Peak Number of Holes: 2 holes
+Avg Memory Utilization: 34.77%
+Total Memory: 4096 bytes (4 KB)

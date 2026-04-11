@@ -1,4 +1,3 @@
-
 package ur_os.system;
 
 import static ur_os.memory.MemoryManagerType.CONTIGUOUS;
@@ -14,6 +13,7 @@ import ur_os.memory.SystemMemoryManager;
 import ur_os.memory.contiguous.PMM_Contiguous;
 import ur_os.memory.contiguous.SMM_Contiguous;
 import ur_os.memory.freememorymagament.BestFitMemorySlotManager;
+import ur_os.memory.freememorymagament.BuddySystemMemorySlotManager;
 import ur_os.memory.freememorymagament.FirstFitMemorySlotManager;
 import ur_os.memory.freememorymagament.FreeFramesManager;
 import ur_os.memory.freememorymagament.FreeMemoryManager;
@@ -33,7 +33,6 @@ import ur_os.process.planning.ReadyQueue;
 import ur_os.virtualmemory.*;
 import ur_os.virtualmemory.ProcessVirtualMemoryManagerType;
 
-
 public class OS {
 
   ReadyQueue rq;
@@ -50,7 +49,7 @@ public class OS {
   public static final int MAX_PROCESS_PRIORITY = 10; // Page size in bytes
   public static final int PAGE_SIZE = 64; // Page size in bytes
   public static final MemoryManagerType SMM = MemoryManagerType.CONTIGUOUS;
-  public static final FreeMemorySlotManagerType MSM = FreeMemorySlotManagerType.WORST_FIT;
+  public static final FreeMemorySlotManagerType MSM = FreeMemorySlotManagerType.BUDDY;
 
   public static final ProcessVirtualMemoryManagerType PVMM = ProcessVirtualMemoryManagerType.LRU;
   public static final int FRAMES_PER_PROCESS =
@@ -97,6 +96,10 @@ public class OS {
         case NEXT_FIT:
           fmm = new NextFitMemorySlotManager(SystemOS.MEMORY_SIZE);
           fvmm = new NextFitMemorySlotManager(SystemOS.SWAP_MEMORY_SIZE);
+          break;
+        case BUDDY:
+          fmm = new BuddySystemMemorySlotManager(SystemOS.MEMORY_SIZE);
+          fvmm = new BuddySystemMemorySlotManager(SystemOS.SWAP_MEMORY_SIZE);
           break;
       }
     }

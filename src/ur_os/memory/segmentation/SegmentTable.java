@@ -87,6 +87,16 @@ public class SegmentTable {
         int offset = -1;
         
         //Include your code here
+        int cumulative = 0;
+        for (int i = 0; i < segmentTable.size(); i++) {
+            int limit = segmentTable.get(i).getLimit();
+            if (locAdd < cumulative + limit) {
+                segment = i;
+                offset = locAdd - cumulative;
+                break;
+            }
+            cumulative += limit;
+        }
         
         //For Virtual Memory
         if(store){
@@ -100,8 +110,11 @@ public class SegmentTable {
     public MemoryAddress getPhysicalMemoryAddressFromLogicalMemoryAddress(MemoryAddress m){
         
         //Include your code here
-        
-        return new MemoryAddress(-1, -1);
+        int segment = m.getDivision();
+        int offset = m.getOffset();
+        SegmentTableEntry entry = segmentTable.get(segment);
+        int base = entry.getBase();
+        return new MemoryAddress(base, offset);
     }
     
     public SegmentTableEntry getSegment(int i){

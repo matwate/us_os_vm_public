@@ -44,6 +44,16 @@ public class FreeFramesManager extends FreeMemoryManager{
     public int getSize(){
         return freeFrames.size();
     }
+    
+    public int getTotalFrames(){
+        // Total frames is based on the size passed to constructor (MEMORY_SIZE or SWAP_MEMORY_SIZE)
+        return freeFrames.size();
+    }
+    
+    public double getMemoryUtilization(int totalFrames){
+        if (totalFrames == 0) return 0.0;
+        return (double) (totalFrames - freeFrames.size()) / totalFrames;
+    }
 
     public void reclaimFrame(int frameID){
         this.freeFrames.add(frameID);

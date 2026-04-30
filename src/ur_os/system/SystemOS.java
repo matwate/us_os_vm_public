@@ -11,7 +11,9 @@ import ur_os.memory.Memory;
 import ur_os.memory.MemoryInstruction;
 import ur_os.memory.MemoryManagerType;
 import ur_os.memory.MemoryOperationType;
+import ur_os.memory.freememorymagament.FreeFramesManager;
 import ur_os.memory.freememorymagament.FreeMemorySlotManager;
+import ur_os.memory.paging.PMM_Paging;
 import ur_os.process.EndInstruction;
 import ur_os.process.IOInstruction;
 import ur_os.process.Instruction;
@@ -51,6 +53,8 @@ public class SystemOS implements Runnable {
   private int totalHoles = 0;
   private double peakExternalFragmentation = 0;
   private int peakHoles = 0;
+  private double totalInternalFragmentation = 0;
+  private double peakInternalFragmentation = 0;
   private int fragmentationSamples = 0;
 
   public SystemOS(SimulationType simType) {
@@ -468,11 +472,18 @@ public class SystemOS implements Runnable {
       double avgEF = totalExternalFragmentation / fragmentationSamples;
       double avgMU = totalMemoryUtilization / fragmentationSamples;
       double avgHoles = (double) totalHoles / fragmentationSamples;
-      System.out.printf("Avg External Fragmentation: %.2f%%%n", avgEF * 100);
-      System.out.printf("Peak External Fragmentation: %.2f%%%n", peakExternalFragmentation * 100);
-      System.out.printf("Avg Number of Holes: %.2f holes%n", avgHoles);
-      System.out.printf("Peak Number of Holes: %d holes%n", peakHoles);
-      System.out.printf("Avg Memory Utilization: %.2f%%%n", avgMU * 100);
+      if (OS.SMM == MemoryManagerType.PAGING) {
+        double avgIF = totalInternalFragmentation / fragmentationSamples;
+        System.out.printf("Avg Internal Fragmentation: %.2f%%%n", avgIF * 100);
+        System.out.printf("Peak Internal Fragmentation: %.2f%%%n", peakInternalFragmentation * 100);
+        System.out.printf("Avg Memory Utilization: %.2f%%%n", avgMU * 100);
+      } else {
+        System.out.printf("Avg External Fragmentation: %.2f%%%n", avgEF * 100);
+        System.out.printf("Peak External Fragmentation: %.2f%%%n", peakExternalFragmentation * 100);
+        System.out.printf("Avg Number of Holes: %.2f holes%n", avgHoles);
+        System.out.printf("Peak Number of Holes: %d holes%n", peakHoles);
+        System.out.printf("Avg Memory Utilization: %.2f%%%n", avgMU * 100);
+      }
       System.out.println(
           "Total Memory: " + MEMORY_SIZE + " bytes (" + (MEMORY_SIZE / 1024) + " KB)");
     }
@@ -520,10 +531,32 @@ public class SystemOS implements Runnable {
     return msm.getExternalFragmentation();
   }
 
+  public double calcInternalFragmentation() {
+    if (OS.SMM != MemoryManagerType.PAGING) return 0.0;
+    int totalAllocated = 0;
+    int totalWasted = 0;
+    for (Process p : processes) {
+      if (p.getPMM() != null && p.getPMM().getType() == MemoryManagerType.PAGING) {
+        PMM_Paging pmm = (PMM_Paging) p.getPMM();
+        int pages = pmm.getPT().getSize();
+        int allocated = pages * OS.PAGE_SIZE;
+        int wasted = allocated - pmm.getSize();
+        totalAllocated += allocated;
+        totalWasted += wasted;
+      }
+    }
+    if (totalAllocated == 0) return 0.0;
+    return (double) totalWasted / totalAllocated;
+  }
+
   public double calcMemoryUtilization() {
-    if (OS.SMM == MemoryManagerType.PAGING) return 0.0;
+    if (OS.SMM == MemoryManagerType.PAGING) {
+      FreeFramesManager ffm = (FreeFramesManager) os.fmm;
+      int totalFrames = SystemOS.MEMORY_SIZE / OS.PAGE_SIZE;
+      return ffm.getMemoryUtilization(totalFrames);
+    }
     FreeMemorySlotManager msm = (FreeMemorySlotManager) os.fmm;
-    return msm.getMemoryUtilization(MEMORY_SIZE);
+    return 1.0 - msm.getMemoryUtilization(MEMORY_SIZE);
   }
 
   public int calcTotalFreeMemory() {
@@ -601,7 +634,20 @@ public class SystemOS implements Runnable {
   }
 
   private void updateFragmentationMetrics() {
-    if (OS.SMM != MemoryManagerType.PAGING) {
+    fragmentationSamples++;
+    if (OS.SMM == MemoryManagerType.PAGING) {
+      // Paging: track internal fragmentation and memory utilization
+      FreeFramesManager ffm = (FreeFramesManager) os.fmm;
+      int totalFrames = SystemOS.MEMORY_SIZE / OS.PAGE_SIZE;
+      double mu = ffm.getMemoryUtilization(totalFrames);
+      double ifrag = calcInternalFragmentation();
+
+      totalMemoryUtilization += mu;
+      totalInternalFragmentation += ifrag;
+
+      if (ifrag > peakInternalFragmentation) peakInternalFragmentation = ifrag;
+    } else {
+      // Contiguous / Segmentation: track external fragmentation, holes, utilization
       FreeMemorySlotManager msm = (FreeMemorySlotManager) os.fmm;
       double ef = msm.getExternalFragmentation();
       double mu = 1.0 - msm.getMemoryUtilization(MEMORY_SIZE);
@@ -613,8 +659,6 @@ public class SystemOS implements Runnable {
 
       if (ef > peakExternalFragmentation) peakExternalFragmentation = ef;
       if (holes > peakHoles) peakHoles = holes;
-
-      fragmentationSamples++;
     }
   }
 }

@@ -48,7 +48,7 @@ public class OS {
 
   public static final int MAX_PROCESS_PRIORITY = 10; // Page size in bytes
   public static final int PAGE_SIZE = 64; // Page size in bytes
-  public static final MemoryManagerType SMM = MemoryManagerType.CONTIGUOUS;
+  public static final MemoryManagerType SMM = MemoryManagerType.SEGMENTATION;
   public static final FreeMemorySlotManagerType MSM = FreeMemorySlotManagerType.BUDDY;
 
   public static final ProcessVirtualMemoryManagerType PVMM = ProcessVirtualMemoryManagerType.LRU;

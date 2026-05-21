@@ -6,6 +6,7 @@ package ur_os.virtualmemory;
 
 import java.util.LinkedList;
 import ur_os.memory.paging.PageTable;
+import ur_os.memory.paging.PageTableEntry;
 
 /**
  *
@@ -19,10 +20,29 @@ public class PVMM_LFU extends ProcessVirtualMemoryManager{
     
     @Override
     public int getVictim(LinkedList<Integer> memoryAccesses, PageTable pt) {
-        
-        //ToDo
-        
-        return -1;
+        // Build list of valid pages
+        LinkedList<Integer> validPages = new LinkedList<>();
+        int i = 0;
+        for (PageTableEntry pte : pt.getList()) {
+            if (pte.isValid()) validPages.add(i);
+            i++;
+        }
+
+        // Count frequency of each valid page in the access history
+        int minCount = Integer.MAX_VALUE;
+        int victim = validPages.get(0); // fallback
+
+        for (int page : validPages) {
+            int count = 0;
+            for (int access : memoryAccesses) {
+                if (access == page) count++;
+            }
+            if (count < minCount) {
+                minCount = count;
+                victim = page;
+            }
+        }
+        return victim;
     }
     
 }

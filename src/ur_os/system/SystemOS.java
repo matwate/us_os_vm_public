@@ -43,7 +43,7 @@ public class SystemOS implements Runnable {
   public static final int SEED_PROCESS_SIZE = 9630;
 
   public static final int MEMORY_SIZE = 12 * 1024 + 1;
-  public static final int SWAP_MEMORY_SIZE = 1_073_741_824; // 1 GB
+  public static final int SWAP_MEMORY_SIZE = 65536; // 64 KB
 
   protected ArrayList<Process> processes;
   ArrayList<Integer> execution;
@@ -59,7 +59,7 @@ public class SystemOS implements Runnable {
 
   public SystemOS(SimulationType simType) {
     memory = new Memory(MEMORY_SIZE);
-    swap = new SwapMemory(MEMORY_SIZE);
+    swap = new SwapMemory(SWAP_MEMORY_SIZE);
     cpu = new CPU(memory, swap);
     ioq = new IOQueue();
     os = new OS(this, cpu, ioq);
@@ -291,67 +291,130 @@ public class SystemOS implements Runnable {
 
   public void initSimulationQueueSimpler4() {
 
-    // Process P0 - arrival: 0, size: 2048, 3 CPU → LOAD(4) → 3 CPU → END
+    // Process P0 - arrival: 0, size: 2048, pages 0-31
+    //  Accesses pages 0, 2, 4, 8 (4 distinct pages, only 3 frames => triggers victim)
     Process p = new Process(0, 0);
     p.setSize(2048);
     Instruction temp;
-    p.addCPUInstructions(3);
-    temp = new MemoryInstruction(MemoryOperationType.LOAD, 0, (byte) -1, 4);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 0, (byte) -1, 3);   // page 0 (pre-loaded)
     p.addInstruction(temp);
-    p.addCPUInstructions(3);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 128, (byte) -1, 3); // page 2
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 256, (byte) -1, 3); // page 4
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 512, (byte) -1, 3); // page 8 => VICTIM
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
     temp = new EndInstruction();
     p.addInstruction(temp);
     processes.add(p);
 
-    // Process P1 - arrival: 1, size: 1024, 2 CPU → STORE(3) → 2 CPU → END
-    p = new Process(1, 1);
+    // Process P1 - arrival: 3, size: 1024, pages 0-15
+    //  Accesses pages 0, 1, 3, 7 (4 distinct pages, triggers victim)
+    p = new Process(1, 3);
     p.setSize(1024);
     p.addCPUInstructions(2);
-    temp = new MemoryInstruction(MemoryOperationType.STORE, 0, (byte) 0, 3);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 0, (byte) 42, 3);  // page 0 (pre-loaded)
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 64, (byte) 42, 3); // page 1
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 192, (byte) 42, 3);// page 3
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 448, (byte) 42, 3);// page 7 => VICTIM
     p.addInstruction(temp);
     p.addCPUInstructions(2);
     temp = new EndInstruction();
     p.addInstruction(temp);
     processes.add(p);
 
-    // Process P2 - arrival: 2, size: 3072, 6 CPU → LOAD(4) → 6 CPU → END
-    p = new Process(2, 2);
+    // Process P2 - arrival: 10, size: 3072, pages 0-47
+    //  Accesses pages 0, 5, 10, 20, 30 (5 distinct, triggers multiple victims)
+    p = new Process(2, 10);
     p.setSize(3072);
-    p.addCPUInstructions(6);
-    temp = new MemoryInstruction(MemoryOperationType.LOAD, 0, (byte) -1, 4);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 0, (byte) -1, 3);   // page 0 (pre-loaded)
     p.addInstruction(temp);
-    p.addCPUInstructions(6);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 320, (byte) -1, 3); // page 5
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 640, (byte) -1, 3); // page 10
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 1280, (byte) -1, 3);// page 20 => VICTIM
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 1920, (byte) -1, 3);// page 30 => VICTIM
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
     temp = new EndInstruction();
     p.addInstruction(temp);
     processes.add(p);
 
-    // Process P3 - arrival: 15, size: 1536, 4 CPU → STORE(4) → 4 CPU → END
-    p = new Process(3, 15);
+    // Process P3 - arrival: 30, size: 1536, pages 0-23
+    //  Accesses pages 0, 3, 6, 12 (4 distinct, triggers victim)
+    p = new Process(3, 30);
     p.setSize(1536);
-    p.addCPUInstructions(4);
-    temp = new MemoryInstruction(MemoryOperationType.STORE, 0, (byte) 0, 4);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 0, (byte) 99, 3);  // page 0 (pre-loaded)
     p.addInstruction(temp);
-    p.addCPUInstructions(4);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 192, (byte) 99, 3);// page 3
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 384, (byte) 99, 3);// page 6
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 768, (byte) 99, 3);// page 12 => VICTIM
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
     temp = new EndInstruction();
     p.addInstruction(temp);
     processes.add(p);
 
-    // Process P4 - arrival: 22, size: 2048, 3 CPU → LOAD(3) → 3 CPU → END
-    p = new Process(4, 22);
+    // Process P4 - arrival: 48, size: 2048, pages 0-31
+    //  Accesses pages 0, 4, 8, 16 (4 distinct, triggers victim)
+    p = new Process(4, 48);
     p.setSize(2048);
-    p.addCPUInstructions(3);
-    temp = new MemoryInstruction(MemoryOperationType.LOAD, 0, (byte) -1, 3);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 0, (byte) -1, 3);   // page 0 (pre-loaded)
     p.addInstruction(temp);
-    p.addCPUInstructions(3);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 256, (byte) -1, 3); // page 4
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 512, (byte) -1, 3); // page 8
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.LOAD, 1024, (byte) -1, 3);// page 16 => VICTIM
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
     temp = new EndInstruction();
     p.addInstruction(temp);
     processes.add(p);
 
-    // Process P5 - arrival: 30, size: 768, 2 CPU → STORE(3) → 2 CPU → END
-    p = new Process(5, 30);
+    // Process P5 - arrival: 68, size: 768, pages 0-11
+    //  Accesses pages 0, 2, 5, 8 (4 distinct, triggers victim)
+    p = new Process(5, 68);
     p.setSize(768);
     p.addCPUInstructions(2);
-    temp = new MemoryInstruction(MemoryOperationType.STORE, 0, (byte) 0, 3);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 0, (byte) 77, 3);  // page 0 (pre-loaded)
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 128, (byte) 77, 3);// page 2
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 320, (byte) 77, 3);// page 5
+    p.addInstruction(temp);
+    p.addCPUInstructions(2);
+    temp = new MemoryInstruction(MemoryOperationType.STORE, 512, (byte) 77, 3);// page 8 => VICTIM
     p.addInstruction(temp);
     p.addCPUInstructions(2);
     temp = new EndInstruction();

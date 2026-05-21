@@ -14,6 +14,7 @@ public class PageTableEntry implements Comparable{
     int clock;
     boolean valid;
     boolean dirty;
+    boolean referenced;
 
     public PageTableEntry(int frameId) {
         this(frameId, false, 0);
@@ -28,6 +29,7 @@ public class PageTableEntry implements Comparable{
         this.valid = valid;
         dirty = false;
         this.clock = clock;
+        referenced = false;
     }
     
     public void setDirty(boolean dirty){
@@ -62,9 +64,17 @@ public class PageTableEntry implements Comparable{
         return dirty;
     }
     
+    public boolean isReferenced() {
+        return referenced;
+    }
+    
+    public void setReferenced(boolean ref) {
+        this.referenced = ref;
+    }
+    
     @Override
     public String toString(){
-        return "Frame: "+frameId+" Valid: "+valid+" Dirty: "+dirty+" Clock: "+clock;
+        return "Frame: "+frameId+" Valid: "+valid+" Dirty: "+dirty+" Ref: "+referenced+" Clock: "+clock;
     }
 
     @Override

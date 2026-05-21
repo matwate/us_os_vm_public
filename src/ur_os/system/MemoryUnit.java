@@ -28,7 +28,7 @@ public class MemoryUnit {
     CPU cpu;
     
     public MemoryUnit(){
-        this(new Memory(SystemOS.MEMORY_SIZE),new SwapMemory(SystemOS.MEMORY_SIZE),null,null);
+        this(new Memory(SystemOS.MEMORY_SIZE),new SwapMemory(SystemOS.SWAP_MEMORY_SIZE),null,null);
     }
     
     public MemoryUnit(Memory m, SwapMemory s, CPU cpu, SystemMemoryManager smm){

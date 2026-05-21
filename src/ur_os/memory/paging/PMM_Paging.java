@@ -126,11 +126,12 @@ public class PMM_Paging extends ProcessMemoryManager {
       return null; // Page fault
     }
     this.addMemoryAccess(page);
+    pt.getList().get(page).setReferenced(true);
     return new MemoryAddress(frame * PageTable.getPageSize(), offset);
   }
 
   public int getVFrameMemoryAddressFromLogicalMemoryAddress(int page) {
-    return getVFrameMemoryAddressFromLogicalMemoryAddress(new MemoryAddress(page, 0)).getDivision();
+    return vpt.getFrameIdFromPage(page);
   }
 
   public MemoryAddress getVFrameMemoryAddressFromLogicalMemoryAddress(MemoryAddress m) {
